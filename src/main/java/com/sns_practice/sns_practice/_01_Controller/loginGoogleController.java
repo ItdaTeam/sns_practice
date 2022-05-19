@@ -27,7 +27,7 @@ public class loginGoogleController {
     public String getGoogleAuthUrl() throws Exception {
         String reqUrl = "https://accounts.google.com" +
                 "/o/oauth2/v2/auth?client_id=" +
-                "482544352642-bcm2rk88c7bt103ji8mofi7br0evoaat.apps.googleusercontent.com" +
+                "클라이언트 아이디" +   //클라이언트 아이디
                 "&redirect_uri=" +
                 "http://localhost:8181/oauth_google" +
                 "&response_type=code&scope=email%20profile%20openid&access_type=offline";
@@ -42,8 +42,8 @@ public class loginGoogleController {
         // restTemplate 호출
         RestTemplate restTemplate = new RestTemplate();
         GoogleOAuthRequest googleOAuthRequestParam = GoogleOAuthRequest.builder()
-                .clientId("482544352642-bcm2rk88c7bt103ji8mofi7br0evoaat.apps.googleusercontent.com")
-                .clientSecret("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")
+                .clientId("clientId")   /* 클라이언트 아이디 */
+                .clientSecret("clientSecret")   /* 클라이언트 보안키 */
                 .code(authCode)
                 .redirectUri("http://localhost:8181" + "/oauth_google")
                 .grantType("authorization_code")

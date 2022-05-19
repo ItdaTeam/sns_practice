@@ -25,7 +25,7 @@ public class loginKakaoController {
     public String getKakaoAuthUrl() throws Exception {
         String reqUrl =
                 "https://kauth.kakao.com/oauth/authorize"
-                        + "?client_id=5719a074f0e031b6a83b69dd3777f748"
+                        + "?client_id=클라이언트아이디"
                         + "&redirect_uri=http://localhost:8181/login/oauth_kakao"
                         + "&response_type=code";
 
@@ -37,7 +37,7 @@ public class loginKakaoController {
     @ResponseBody
     public String kakaoLogout() throws Exception {
         String reqUrl ="https://kauth.kakao.com/oauth/logout" +
-                        "?client_id=5719a074f0e031b6a83b69dd3777f748" +
+                        "?client_id=클라이언트아이디" +
                         "&logout_redirect_uri=http://localhost:8181/";
         return reqUrl;
     }
@@ -137,7 +137,7 @@ public class loginKakaoController {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=5719a074f0e031b6a83b69dd3777f748");  //본인이 발급받은 key
+            sb.append("&client_id=클라이언트아이디");  //본인이 발급받은 key
             sb.append("&redirect_uri=http://localhost:8181/login/oauth_kakao");     // 본인이 설정해 놓은 경로
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());

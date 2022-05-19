@@ -3,18 +3,12 @@ package com.sns_practice.sns_practice._01_Controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.springframework.boot.web.reactive.function.client.WebClientCustomizer;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigInteger;
@@ -36,7 +30,7 @@ public class loginNaverController {
 
         String reqUrl =
                 "https://nid.naver.com/oauth2.0/authorize"
-                        + "?client_id=DHIKFAYck3YKv6kuKefF"
+                        + "?client_id=클라이언트아이디"
                         + "&redirect_uri=http://localhost:8181/naver/callback"
                         + "&response_type=code"
                         + "&state=" + state;
@@ -49,8 +43,6 @@ public class loginNaverController {
     public String naverLogout() {
 
         String reqUrl = "http://nid.naver.com/nidlogin.logout?url=http://localhost:8181/";
-//                        "client_id=5719a074f0e031b6a83b69dd3777f748"+
-//                        "&redirect_uri=http://localhost:8181/" ;
         return reqUrl;
     }
 
@@ -106,8 +98,8 @@ public class loginNaverController {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=DHIKFAYck3YKv6kuKefF");  //본인이 발급받은 key
-            sb.append("&client_secret=94_O0zM5Tb");  //본인이 발급받은 key
+            sb.append("&client_id=클라이언트아이디");  //본인이 발급받은 key
+            sb.append("&client_secret=클라이언트보안키");  //본인이 발급받은 key
             sb.append("&redirect_uri=http://localhost:8181/naver/callback");     // 본인이 설정해 놓은 경로
             sb.append("&code=" + code);
             sb.append("&state=" + state);
