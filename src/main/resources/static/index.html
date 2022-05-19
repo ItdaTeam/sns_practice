@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <p>Hello World</p>
+    <a href="#" onclick="kakaoLogin()"><img src="./img/kakao_login_medium_narrow.png"></a><br>
+    <a href="#" onclick="googleLogin()"><img src="./img/btn_google_signin_dark_normal_web.png"></a><br>
+    <a href="#" onclick="naverLogin()"><img src="./img/btnG_naver.png"></a>
+
+
+</body>
+</html>
+<style>
+    img{
+        width: 200px;
+    }
+</style>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+    //카카오로그인
+    function kakaoLogin() {
+
+        $.ajax({
+            url: '/login/getKakaoAuthUrl',
+            type: 'get',
+            async: false,
+            dataType: 'text',
+            success: function (res) {
+                location.href = res;
+            }
+        });
+    }
+    //구글로그인
+    function googleLogin() {
+
+        $.ajax({
+            url: '/login/getGoogleAuthUrl',
+            type: 'get',
+            async: false,
+            dataType: 'text',
+            success: function (res) {
+                location.href = res;
+            }
+        });
+    }
+    //네이버
+    function naverLogin() {
+
+        $.ajax({
+            url: '/naver/oauth',
+            type: 'get',
+            async: false,
+            dataType: 'text',
+            success: function (res) {
+                location.href = res;
+            }
+        });
+    }
+</script>

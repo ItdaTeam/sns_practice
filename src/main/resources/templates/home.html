@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello kakao</title>
+</head>
+<body>
+  <p>SNS로그인 정보</p>
+
+<div>
+    <p>SNS 타입 : <b id="snsType">-</b></p>
+    <p>아이디 : <b id="id">-</b></p>
+    <p>토큰 : <b id="accessToken">-</b></p>
+    <p>닉네임 : <b id="nickname">-</b></p>
+    <p>접속시간 : <b id="lastLoc">-</b></p>
+    <p>프로필사진 : <img id="profileImage"></p>
+</div>
+<button onclick="kakaoLogout()">로그아웃</button>
+<button onclick="naverDisconnect()">네이버로그아웃</button>
+<button onclick="kakaoDisconnect()">회원탈퇴</button>
+<button onclick="chat()">채팅방 입장</button>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function(){
+
+        // var lastLoc = [[${info.lastLoc}]]
+        //
+        // lastLoc= new Date(lastLoc).format("yyyy-mm-dd HH:MM:ss")
+
+
+        $('#id').html("[[${info.id}]]");
+        $('#snsType').html("[[${info.snsType}]]");
+        $('#nickname').text("[[${info.nickname}]]");
+        $('#lastLoc').text( "[[${info.lastLoc}]]");
+        $('#profileImage').attr("src","[[${info.profileImage}]]");
+        $('#accessToken').text("[[${info.accessToken}]]");
+    })
+
+
+    function kakaoLogout(){
+        $.ajax({
+            url: '/logout/kakao',
+            type: 'get',
+            async: false,
+            dataType: 'text',
+            success: function (res) {
+                location.href = res;
+            }
+        });
+    }
+
+    function kakaoDisconnect(){
+        $.ajax({
+            url: '/disconnect/kakao',
+            type: 'get',
+            async: false,
+            dataType: 'text',
+            data : {"accessToken" : $('#accessToken').text()},
+            success: function (res) {
+                location.href = res;
+            }
+        });
+    }
+
+    function naverDisconnect(){
+        $.ajax({
+            url: '/naver/logout',
+            type: 'get',
+            async: false,
+            dataType: 'text',
+            success: function (res) {
+                location.href = res;
+            }
+        });
+    }
+
+    function chat(){
+        $.ajax({
+            url: '/chat',
+            type: 'get',
+            async: false,
+            data : {
+                "nickname" : $('#nickname').text()
+            },
+            success: function (res) {
+                location.href = res;
+            }
+        });
+    }
+
+
+
+</script>
+</html>
+
